@@ -801,7 +801,7 @@ function mousePressed() {
       if (mouseY > eraserY && mouseY < eraserY + toolH) currentTool = "eraser";
     }
 
-    let py = height * 0.64;
+    let py = height * 0.60;
     if (dist(mouseX, mouseY, 73,  py + 91)  < 20) clr = ["#ff3131"];
     if (dist(mouseX, mouseY, 99,  py + 71)  < 20) clr = ["#ff914d"];
     if (dist(mouseX, mouseY, 126, py + 64)  < 20) clr = ["#ffde59"];
