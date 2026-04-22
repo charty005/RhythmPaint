@@ -55,7 +55,7 @@ let toolOffset = -20;
 let brushY     = 120;
 let pencilY    = 200;
 let eraserY    = 290;
-let topBtnSize = 60;
+let topBtnSize = 75;
 
 // ===== RHYTHM GAME ASSETS =====
 let leftImg, upImg, rightImg, spaceImg;
@@ -167,6 +167,9 @@ function setup() {
 
   drawLayer = createGraphics(windowWidth, windowHeight);
   drawLayer.clear();
+
+  setupRhythmGame();
+  bgMusic.loop();
 }
 
 function windowResized() {
@@ -375,7 +378,6 @@ function drawFreePaintScreen() {
     { x: 155, y: 471 },{ x: 173, y: 499 }, { x: 176, y: 537 },
     { x: 162, y: 573 },{ x: 52, y: 519 },  { x: 143, y: 600 },
   ];
-  
   for (let p of palettePoints) {
     if (dist(mouseX, mouseY, p.x, p.y) < hoverRadius) {
       noFill();
@@ -415,15 +417,15 @@ function drawFreePaintToolbar() {
   rect(0, 0, toolbarWidth, height, 20);
 
   // top row: save, clear, menu
-  let smallBtn = 50; // undo/redo slightly bigger
+  let smallBtn = 100; // undo/redo slightly bigger
   imageMode(CORNER);
-  image(saveImg,  20,  14, topBtnSize, topBtnSize);
-  image(clearImg, 95,  14, topBtnSize, topBtnSize);
-  image(menuImg,  170, 14, topBtnSize, topBtnSize);
+  image(saveImg,  10,  700, topBtnSize, topBtnSize);
+  image(clearImg, 85,  700, topBtnSize, topBtnSize);
+  image(menuImg,  160, 700, topBtnSize, topBtnSize);
 
   // second row: undo + redo
-  image(undoImg,  55,  82, smallBtn, smallBtn);
-  image(redoImg,  125, 82, smallBtn, smallBtn);
+  image(undoImg,  25,  44, smallBtn, smallBtn);
+  image(redoImg,  125, 44, smallBtn, smallBtn);
 
   // tool highlight
   fill(255, 255, 0, 100);
@@ -436,7 +438,7 @@ function drawFreePaintToolbar() {
   image(pencilImg, toolX, pencilY + toolOffset, toolW, toolH + 40);
   image(eraserImg, toolX, eraserY + toolOffset, toolW, toolH + 40);
 
-  let paletteY = height * 0.60;
+  let paletteY = height * 0.51;
   image(paletteImg, 0, paletteY, toolbarWidth, 250);
 }
 
@@ -755,8 +757,7 @@ function redo() {
 // ============================================================
 function mousePressed() {
 
- if (topScreen === "title" && isHovering && !isFading) {
-    bgMusic.loop();
+  if (topScreen === "title" && isHovering && !isFading) {
     fadeTo("menu");
     return;
   }
@@ -774,8 +775,8 @@ function mousePressed() {
   }
 
   if (topScreen === "freepaint") {
-    // menu button — top right of toolbar
-    if (mouseX > 170 && mouseX < 170 + topBtnSize && mouseY > 14 && mouseY < 14 + topBtnSize) {
+     // menu button
+    if (mouseX > 160 && mouseX < 160 + topBtnSize && mouseY > 700 && mouseY < 700 + topBtnSize) {
       if (!bgMusic.isPlaying()) {
         bgMusicVolume = 1.0;
         bgMusic.setVolume(1.0);
@@ -789,11 +790,11 @@ function mousePressed() {
       history.push(drawLayer.get());
       redoStack = [];
     }
-    
-    if (dist(mouseX, mouseY, 50,  44)  < 25) saveCanvas("drawing.png");
-    if (dist(mouseX, mouseY, 125, 44)  < 25) drawLayer.clear();
-    if (dist(mouseX, mouseY, 80,  107) < 25) undo();
-    if (dist(mouseX, mouseY, 150, 107) < 25) redo();
+
+    if (dist(mouseX, mouseY, 47,  737) < 30) saveCanvas("drawing.png");
+    if (dist(mouseX, mouseY, 122, 737) < 30) drawLayer.clear();
+    if (dist(mouseX, mouseY, 75,  94)  < 30) undo();
+    if (dist(mouseX, mouseY, 175, 94)  < 30) redo();
 
     if (mouseX > toolX && mouseX < toolX + toolW) {
       if (mouseY > brushY  && mouseY < brushY  + toolH) currentTool = "brush";
@@ -801,16 +802,15 @@ function mousePressed() {
       if (mouseY > eraserY && mouseY < eraserY + toolH) currentTool = "eraser";
     }
 
-    let py = height * 0.60;
-    if (dist(mouseX, mouseY, 73,  py + 91)  < 20) clr = ["#ff3131"];
-    if (dist(mouseX, mouseY, 99,  py + 71)  < 20) clr = ["#ff914d"];
-    if (dist(mouseX, mouseY, 126, py + 64)  < 20) clr = ["#ffde59"];
-    if (dist(mouseX, mouseY, 155, py + 71)  < 20) clr = ["#00bf63"];
-    if (dist(mouseX, mouseY, 173, py + 99)  < 20) clr = ["#1432d0"];
-    if (dist(mouseX, mouseY, 176, py + 137) < 20) clr = ["#8c52ff"];
-    if (dist(mouseX, mouseY, 162, py + 173) < 20) clr = [0, 0, 0];
-    if (dist(mouseX, mouseY, 52,  py + 119) < 20) clr = [255, 255, 255];
-    if (dist(mouseX, mouseY, 143, py + 200) < 20) clr = ["#7c5934"];
+    if (dist(mouseX, mouseY, 73,  491) < 20) clr = ["#ff3131"];
+    if (dist(mouseX, mouseY, 99,  471) < 20) clr = ["#ff914d"];
+    if (dist(mouseX, mouseY, 126, 464) < 20) clr = ["#ffde59"];
+    if (dist(mouseX, mouseY, 155, 471) < 20) clr = ["#00bf63"];
+    if (dist(mouseX, mouseY, 173, 499) < 20) clr = ["#1432d0"];
+    if (dist(mouseX, mouseY, 176, 537) < 20) clr = ["#8c52ff"];
+    if (dist(mouseX, mouseY, 162, 573) < 20) clr = [0, 0, 0];
+    if (dist(mouseX, mouseY, 52,  519) < 20) clr = [255, 255, 255];
+    if (dist(mouseX, mouseY, 143, 600) < 20) clr = ["#7c5934"];
   }
 }
 
