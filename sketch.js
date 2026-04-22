@@ -375,6 +375,7 @@ function drawFreePaintScreen() {
     { x: 155, y: 471 },{ x: 173, y: 499 }, { x: 176, y: 537 },
     { x: 162, y: 573 },{ x: 52, y: 519 },  { x: 143, y: 600 },
   ];
+  
   for (let p of palettePoints) {
     if (dist(mouseX, mouseY, p.x, p.y) < hoverRadius) {
       noFill();
@@ -435,7 +436,7 @@ function drawFreePaintToolbar() {
   image(pencilImg, toolX, pencilY + toolOffset, toolW, toolH + 40);
   image(eraserImg, toolX, eraserY + toolOffset, toolW, toolH + 40);
 
-  let paletteY = height * 0.60;
+  let paletteY = height * 0.64;
   image(paletteImg, 0, paletteY, toolbarWidth, 250);
 }
 
@@ -800,15 +801,16 @@ function mousePressed() {
       if (mouseY > eraserY && mouseY < eraserY + toolH) currentTool = "eraser";
     }
 
-    if (dist(mouseX, mouseY, 73,  491) < 20) clr = ["#ff3131"];
-    if (dist(mouseX, mouseY, 99,  471) < 20) clr = ["#ff914d"];
-    if (dist(mouseX, mouseY, 126, 464) < 20) clr = ["#ffde59"];
-    if (dist(mouseX, mouseY, 155, 471) < 20) clr = ["#00bf63"];
-    if (dist(mouseX, mouseY, 173, 499) < 20) clr = ["#1432d0"];
-    if (dist(mouseX, mouseY, 176, 537) < 20) clr = ["#8c52ff"];
-    if (dist(mouseX, mouseY, 162, 573) < 20) clr = [0, 0, 0];
-    if (dist(mouseX, mouseY, 52,  519) < 20) clr = [255, 255, 255];
-    if (dist(mouseX, mouseY, 143, 600) < 20) clr = ["#7c5934"];
+    let py = height * 0.64;
+    if (dist(mouseX, mouseY, 73,  py + 91)  < 20) clr = ["#ff3131"];
+    if (dist(mouseX, mouseY, 99,  py + 71)  < 20) clr = ["#ff914d"];
+    if (dist(mouseX, mouseY, 126, py + 64)  < 20) clr = ["#ffde59"];
+    if (dist(mouseX, mouseY, 155, py + 71)  < 20) clr = ["#00bf63"];
+    if (dist(mouseX, mouseY, 173, py + 99)  < 20) clr = ["#1432d0"];
+    if (dist(mouseX, mouseY, 176, py + 137) < 20) clr = ["#8c52ff"];
+    if (dist(mouseX, mouseY, 162, py + 173) < 20) clr = [0, 0, 0];
+    if (dist(mouseX, mouseY, 52,  py + 119) < 20) clr = [255, 255, 255];
+    if (dist(mouseX, mouseY, 143, py + 200) < 20) clr = ["#7c5934"];
   }
 }
 
