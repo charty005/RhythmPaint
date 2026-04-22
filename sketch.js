@@ -167,9 +167,6 @@ function setup() {
 
   drawLayer = createGraphics(windowWidth, windowHeight);
   drawLayer.clear();
-
-  setupRhythmGame();
-  bgMusic.loop();
 }
 
 function windowResized() {
@@ -438,7 +435,7 @@ function drawFreePaintToolbar() {
   image(pencilImg, toolX, pencilY + toolOffset, toolW, toolH + 40);
   image(eraserImg, toolX, eraserY + toolOffset, toolW, toolH + 40);
 
-  let paletteY = height * 0.64;
+  let paletteY = height * 0.60;
   image(paletteImg, 0, paletteY, toolbarWidth, 250);
 }
 
@@ -757,7 +754,8 @@ function redo() {
 // ============================================================
 function mousePressed() {
 
-  if (topScreen === "title" && isHovering && !isFading) {
+ if (topScreen === "title" && isHovering && !isFading) {
+    bgMusic.loop();
     fadeTo("menu");
     return;
   }
