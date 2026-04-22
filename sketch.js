@@ -436,7 +436,7 @@ function drawFreePaintToolbar() {
   image(pencilImg, toolX, pencilY + toolOffset, toolW, toolH + 40);
   image(eraserImg, toolX, eraserY + toolOffset, toolW, toolH + 40);
 
-  let paletteY = height * 0.64;
+  let paletteY = height * 0.60;
   image(paletteImg, 0, paletteY, toolbarWidth, 250);
 }
 
